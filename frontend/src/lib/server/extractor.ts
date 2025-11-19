@@ -1,10 +1,6 @@
-type ExtractEverythingFn = (path?: string, fastMode?: boolean) => Promise<any>;
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const scraperModule = require('../../../../scraper.js') as {
-  extractEverything: ExtractEverythingFn;
-};
+const { extractEverything } = require('@/lib/server/scraper');
 
-export const extractEverything: ExtractEverythingFn = scraperModule.extractEverything;
+export { extractEverything };
 
 
