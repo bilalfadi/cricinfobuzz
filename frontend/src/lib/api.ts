@@ -2,11 +2,16 @@
  * API Client - Fetches live data via API server
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL || '').replace(/\/$/, '');
+
+const buildApiUrl = (path: string) => {
+  if (!API_BASE) return path;
+  return `${API_BASE}${path}`;
+};
 
 export async function getNews() {
   try {
-    const res = await fetch(`${API_URL}/api/news`);
+    const res = await fetch(buildApiUrl('/api/news'));
     return await res.json();
   } catch (error) {
     console.error('Error fetching news:', error);
@@ -16,7 +21,7 @@ export async function getNews() {
 
 export async function getMatches() {
   try {
-    const res = await fetch(`${API_URL}/api/matches`);
+    const res = await fetch(buildApiUrl('/api/matches'));
     return await res.json();
   } catch (error) {
     console.error('Error fetching matches:', error);
@@ -26,7 +31,7 @@ export async function getMatches() {
 
 export async function getVideos() {
   try {
-    const res = await fetch(`${API_URL}/api/videos`);
+    const res = await fetch(buildApiUrl('/api/videos'));
     return await res.json();
   } catch (error) {
     console.error('Error fetching videos:', error);
@@ -37,7 +42,7 @@ export async function getVideos() {
 export async function extractPage(path: string, fullHTML: boolean = false) {
   try {
     // Use /api/extract endpoint which supports all paths
-    const url = `${API_URL}/api/extract?path=${encodeURIComponent(path)}&html=true`;
+    const url = buildApiUrl(`/api/extract?path=${encodeURIComponent(path)}&html=true`);
     console.log(`📡 Fetching from: ${url} (fullHTML: ${fullHTML})`);
     
     const controller = new AbortController();
