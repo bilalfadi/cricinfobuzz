@@ -1,0 +1,25 @@
+{
+  "name": "cricinfobuzz-scraper",
+  "version": "1.0.0",
+  "description": "Cricinfobuzz scraper - extracts all code, HTML, CSS, JavaScript",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js",
+    "scrape": "node scraper.js",
+    "api": "node api-server.js",
+    "dev": "node api-server.js"
+  },
+  "keywords": [
+    "scraper",
+    "cricinfobuzz",
+    "cricket"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
