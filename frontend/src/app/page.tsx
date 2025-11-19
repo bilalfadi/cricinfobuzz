@@ -999,37 +999,106 @@ export default function Home() {
   
 
   if (loading) {
+    const hints = [
+      'Mirroring Cricbuzz layout…',
+      'Syncing live scores…',
+      'Fetching videos & long-form reads…',
+      'Repainting dropdown interactions…',
+    ];
+    const currentHint = hints[Math.floor(Date.now() / 4000) % hints.length];
+
+    const pipeline = [
+      { label: 'News Grid', detail: 'Headline + summary blocks', status: 'Extracting' },
+      { label: 'Live Matches', detail: 'Scorecard widgets', status: 'Streaming' },
+      { label: 'Videos & Photo Feeds', detail: 'Media wall', status: 'Optimizing' },
+      { label: 'CSS & Fonts', detail: 'Critical styles inline', status: 'Injecting' },
+    ];
+
+    const metrics = [
+      { title: 'News Cards', value: '12', caption: 'latest stories', accent: 'from-lime-400 via-emerald-400 to-teal-500' },
+      { title: 'Live Matches', value: '06', caption: 'score widgets', accent: 'from-orange-400 via-amber-400 to-yellow-400' },
+      { title: 'Video Blocks', value: '08', caption: 'clips queued', accent: 'from-cyan-400 via-blue-400 to-indigo-400' },
+    ];
+
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1e40af] via-[#1e3a8a] to-[#1e40af]">
-        <div className="text-center">
-          {/* Animated Logo/Text */}
-          <div className="mb-8">
-            <h1 className="text-5xl font-bold text-white mb-2 animate-pulse">
-              Cricinfobuzz
-            </h1>
-            <div className="h-1 w-32 bg-white/30 mx-auto rounded-full overflow-hidden">
-              <div className="h-full bg-white rounded-full loading-bar-animate"></div>
+      <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.15),transparent_45%)] pointer-events-none" />
+        <div className="absolute -left-32 top-24 h-72 w-72 bg-emerald-500/30 blur-[140px]" />
+        <div className="absolute -right-32 -top-10 h-64 w-64 bg-cyan-500/20 blur-[120px]" />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-16 flex flex-col gap-12">
+          <div className="text-center space-y-4">
+            <p className="text-xs uppercase tracking-[0.6em] text-white/60">Cricinfobuzz Replica</p>
+            <h1 className="text-4xl md:text-5xl font-bold">Spooling Live Homepage</h1>
+            <p className="text-white/70 text-sm md:text-base">{currentHint}</p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-[1.2fr_minmax(0,0.8fr)]">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-lg p-8 shadow-2xl">
+              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-emerald-400/20 blur-3xl" />
+              <div className="relative flex flex-col md:flex-row md:items-center gap-8">
+                <div className="relative h-40 w-40 shrink-0">
+                  <div className="absolute inset-0 rounded-full border border-white/10 bg-gradient-to-br from-emerald-500/40 to-lime-400/20 animate-[spin_14s_linear_infinite]" />
+                  <div className="absolute inset-6 rounded-full border border-white/20 animate-[spin_9s_linear_infinite_reverse]" />
+                  <div className="absolute inset-12 rounded-full bg-slate-950 flex flex-col items-center justify-center gap-1 text-center">
+                    <span className="text-xs uppercase tracking-[0.4em] text-white/40">Live</span>
+                    <span className="text-2xl font-semibold">Clone</span>
+                  </div>
+                </div>
+                <div className="flex-1 space-y-6">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.4em] text-white/60">Streaming Blocks</p>
+                    <p className="text-lg text-white/80">Injecting markup, CSS & scripts from Cricbuzz in near real-time.</p>
+                  </div>
+                  <div className="space-y-4">
+                    {metrics.map((metric) => (
+                      <div key={metric.title} className="flex items-center justify-between text-sm uppercase tracking-wide">
+                        <div>
+                          <p className="text-white/70">{metric.title}</p>
+                          <p className="text-white/40 text-[11px]">{metric.caption}</p>
+                        </div>
+                        <div className={`text-2xl font-semibold bg-gradient-to-r ${metric.accent} text-transparent bg-clip-text`}>
+                          {metric.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="relative h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-lime-300 to-emerald-500 animate-[loading_2.4s_ease_infinite]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-lg p-6 space-y-5">
+              <p className="text-sm uppercase tracking-[0.4em] text-white/60">Replica Pipeline</p>
+              <div className="space-y-4">
+                {pipeline.map((step, idx) => (
+                  <div key={step.label} className="flex items-start gap-3">
+                    <span className="mt-0.5 h-2 w-2 rounded-full bg-gradient-to-r from-emerald-300 to-cyan-300 shadow-[0_0_12px_rgba(16,185,129,0.6)] animate-pulse" />
+                    <div>
+                      <p className="text-white font-medium">{step.label}</p>
+                      <p className="text-white/60 text-xs">{step.detail}</p>
+                      <p className="text-[11px] uppercase tracking-[0.4em] text-white/40 mt-1">{step.status}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          
-          {/* Spinner */}
-          <div className="relative mb-6">
-            <div className="w-20 h-20 border-4 border-white/20 rounded-full mx-auto"></div>
-            <div className="w-20 h-20 border-4 border-transparent border-t-white rounded-full mx-auto animate-spin absolute top-0 left-1/2 transform -translate-x-1/2"></div>
-          </div>
-          
-          {/* Loading Text */}
-          <div className="space-y-2">
-            <p className="text-white text-lg font-semibold animate-pulse">
-              Loading Cricket Updates...
-            </p>
-            <p className="text-white/70 text-sm">
-              Fetching latest news and live scores
-            </p>
-            <div className="flex justify-center gap-1 mt-4">
-              <div className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-              <div className="w-2 h-2 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-              <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+
+          <div className="grid gap-4 md:grid-cols-3 text-sm text-white/80">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+              <p className="text-white font-semibold">Mirror Mode</p>
+              <p className="text-xs text-white/60 mt-2">Injecting Cricbuzz DOM + dropdown logic.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+              <p className="text-white font-semibold">Live Polling</p>
+              <p className="text-xs text-white/60 mt-2">Auto refresh every 30 seconds.</p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+              <p className="text-white font-semibold">Brand Clean-up</p>
+              <p className="text-xs text-white/60 mt-2">Removing original logos & wording.</p>
             </div>
           </div>
         </div>
