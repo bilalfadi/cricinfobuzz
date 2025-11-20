@@ -955,82 +955,15 @@ export default function DynamicPage() {
   
 
   if (loading) {
-    const hints = [
-      'Replaying original Cricbuzz markup…',
-      'Bootstrapping dropdown + carousel scripts…',
-      'Hydrating cloned CSS + fonts…',
-      'Clearing logos & brand traces…',
-    ];
-    const currentHint = hints[Math.floor(Date.now() / 4000) % hints.length];
-    const pathLabel = pathname === '/' ? 'Homepage' : pathname;
-
-    const steps = [
-      { label: 'Fetch Raw HTML', detail: 'Original Cricbuzz payload', progress: 82 },
-      { label: 'Inject CSS / Fonts', detail: 'Critical + async styles', progress: 68 },
-      { label: 'Safe Scripts Only', detail: 'Dropdowns, tabs, menus', progress: 57 },
-      { label: 'Brand Cleanup', detail: 'Logos & references replaced', progress: 46 },
-    ];
-
     return (
-      <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12),transparent_45%)] pointer-events-none" />
-        <div className="absolute -left-24 top-10 h-64 w-64 bg-cyan-500/25 blur-[140px]" />
-        <div className="absolute -right-32 bottom-0 h-72 w-72 bg-emerald-500/20 blur-[130px]" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 py-16 flex flex-col gap-10">
-          <div className="space-y-3 text-center">
-            <p className="text-xs uppercase tracking-[0.6em] text-white/50">Mirror Mode</p>
-            <h1 className="text-3xl md:text-4xl font-bold break-all">{pathLabel}</h1>
-            <p className="text-white/70 text-sm md:text-base">{currentHint}</p>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8 shadow-2xl space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-              <div>
-                <p className="text-sm uppercase tracking-[0.4em] text-white/60">Page Replay</p>
-                <p className="text-white/80 text-base">We are recreating the exact DOM, CSS and safe scripts from Cricbuzz.</p>
-              </div>
-              <div className="flex gap-4">
-                <div className="text-center">
-                  <div className="text-3xl font-semibold">∞</div>
-                  <p className="text-[11px] uppercase tracking-[0.4em] text-white/40">Live</p>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-semibold">{steps.length}</div>
-                  <p className="text-[11px] uppercase tracking-[0.4em] text-white/40">Stages</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-5">
-              {steps.map((step) => (
-                <div key={step.label}>
-                  <div className="flex items-center justify-between text-sm font-medium">
-                    <p>{step.label}</p>
-                    <span className="text-white/60">{step.progress}%</span>
-                  </div>
-                  <p className="text-xs text-white/50 mb-2">{step.detail}</p>
-                  <div className="relative h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                    <div
-                      className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400 animate-[loading_2.8s_ease_infinite]"
-                      style={{ width: `${step.progress}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 text-sm text-white/80">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-              <p className="text-white font-semibold">Exact Replica</p>
-              <p className="text-xs text-white/60 mt-2">Loading raw HTML from Cricbuzz.</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-              <p className="text-white font-semibold">Live Refresh</p>
-              <p className="text-xs text-white/60 mt-2">Auto updates every 30s.</p>
-            </div>
-          </div>
+      <div className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center gap-6">
+        <div className="relative h-14 w-14">
+          <div className="absolute inset-0 rounded-full border-4 border-slate-800" />
+          <div className="absolute inset-0 rounded-full border-4 border-emerald-400 border-t-transparent animate-spin" />
+        </div>
+        <div className="text-center space-y-2">
+          <p className="text-lg font-semibold">Loading Cricinfobuzz</p>
+          <p className="text-sm text-white/60">Please waitâ€¦</p>
         </div>
       </div>
     );
